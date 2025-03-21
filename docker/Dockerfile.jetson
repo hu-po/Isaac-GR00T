@@ -1,6 +1,5 @@
 FROM nvcr.io/nvidia/l4t-cuda:12.6.11-runtime
 ENV DEBIAN_FRONTEND=noninteractive
-ENV PYTHONPATH=/workspace:${PYTHONPATH}
 
 # System dependencies
 RUN apt update && \
