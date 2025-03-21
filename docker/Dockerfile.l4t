@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/l4t-cuda:12.6.11-runtime
+FROM nvcr.io/nvidia/12.6.11-devel:12.6.11-devel-aarch64-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # System dependencies
