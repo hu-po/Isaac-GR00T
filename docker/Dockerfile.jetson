@@ -14,11 +14,12 @@ RUN apt update && \
     libglib2.0-0 libsm6 libxext6 libxrender-dev
 
 # l4t-cuda image does not have pip
-RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
 
 # Build decord from source (https://github.com/dmlc/decord/issues/297)
-RUN apt install -y python3-dev python3-setuptools make cmake \
-ffmpeg libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev
+RUN apt-get update && apt-get install -y software-properties-common && \
+    apt-add-repository universe && apt-get update && \
+    apt-get install -y python3-dev python3-setuptools make cmake ffmpeg libavcodec-dev libavfilter-dev libavformat-dev libavutil-dev
 WORKDIR /workspace
 RUN git clone --recursive https://github.com/dmlc/decord.git
 WORKDIR /workspace/decord
