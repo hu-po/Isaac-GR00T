@@ -29,6 +29,11 @@ RUN python3 setup.py install
 # Optionally, remove any pre-built eva-decord to avoid conflicts
 RUN pip uninstall -y eva-decord || true
 
+# Set CUDA environment variables
+ENV CUDA_HOME=/usr/local/cuda
+ENV PATH=${CUDA_HOME}/bin:${PATH}
+ENV LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+
 RUN pip install --upgrade pip setuptools
 RUN pip install gpustat wandb==0.19.0
 # Create and set working directory
