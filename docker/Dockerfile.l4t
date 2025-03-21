@@ -44,6 +44,13 @@ COPY pyproject.toml .
 RUN pip install -e .
 # There's a conflict in the native python, so we have to resolve it by
 RUN pip uninstall -y transformer-engine
+RUN python3 -c "import torch; print(torch.cuda._is_compiled())"
+# Install pytorch from source
+RUN git clone --recursive --branch v2.5.1 https://github.com/pytorch/pytorch.git /pytorch
+WORKDIR /pytorch
+ENV USE_CUDA=1
+ENV CUDA_HOME=/usr/local/cuda
+RUN python3 setup.py install
 RUN env CUDA_HOME=/usr/local/cuda pip install flash_attn==2.7.1.post4 -U --force-reinstall
 # Clean any existing OpenCV installations
 RUN pip uninstall -y opencv-python opencv-python-headless || true
